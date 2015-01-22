@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="orange">#FF9912</color>
+    <color name="dark_sky">#284954</color>
+    <color name="light_sky">#57a1ba</color>
+    <color name="white">#ffffff</color>
+    <color name="white_light_sky">#7dbbd0</color>
+
+</resources>

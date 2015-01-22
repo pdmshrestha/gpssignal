@@ -1,0 +1,8 @@
+.metadata
+GPSSignal/bin
+GPSSignal/gen
+android-support-v7-appcompat/bin
+android-support-v7-appcompat/gen
+google-play-services_lib/bin
+google-play-services_lib/gen
+
