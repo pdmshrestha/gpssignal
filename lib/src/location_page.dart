@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:gps_signal/src/banner_ad_container.dart';
 import 'package:gps_signal/src/data.dart';
 import 'package:gps_signal/src/share_btn.dart';
+import 'package:gps_signal/src/speedometer_page.dart';
 import 'package:location/location.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
@@ -49,15 +50,23 @@ class LocationPage extends StatelessWidget {
                 final items =
                     collectListItems(snapshot.data ?? LocationData.fromMap({}));
                 return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  separatorBuilder: (_, __) => const Divider(height: 1.0),
-                  itemCount: items.length,
-                  itemBuilder: (_, i) => ListTile(
-                    title: Text(items[i].label),
-                    trailing: Text(items[i].value),
-                  ),
-                );
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    separatorBuilder: (_, __) => const Divider(height: 1.0),
+                    itemCount: items.length,
+                    itemBuilder: (_, i) {
+                      final bool isForSpeed =
+                          items[i].label.toLowerCase() == 'speed';
+                      return ListTile(
+                        title: Text(items[i].label),
+                        subtitle: isForSpeed
+                            ? const Text("Tab for speedometer")
+                            : null,
+                        trailing: Text(items[i].value),
+                        onTap:
+                            isForSpeed ? () => _openSpeedometer(context) : null,
+                      );
+                    });
               },
             ),
             if (!kIsWeb)
@@ -89,6 +98,16 @@ class LocationPage extends StatelessWidget {
             subject: "My current location data",
           );
         },
+      ),
+    );
+  }
+
+  void _openSpeedometer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SpeedometerPage(),
+        fullscreenDialog: true,
       ),
     );
   }
